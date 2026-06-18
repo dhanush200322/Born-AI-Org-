@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-950: var(--bg-color);
+  --color-primary: #4F8CFF;
+  --color-secondary: #9F5CFF;
+  --color-text-main: var(--text-color);
+  --color-text-muted: var(--text-muted);
+  
+  --color-surface: var(--surface-color);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border-color);
+  --color-border-focus: rgba(79, 140, 255, 0.5);
+  
+  --shadow-glow-primary: 0 0 20px var(--glow-primary);
+  --shadow-glow-secondary: 0 0 20px var(--glow-secondary);
+}
+
+:root {
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --text-muted: #64748b;
+  --surface-color: rgba(0, 0, 0, 0.04);
+  --surface-hover: rgba(0, 0, 0, 0.08);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glow-primary: rgba(79, 140, 255, 0.2);
+  --glow-secondary: rgba(159, 92, 255, 0.2);
+}
+
+.dark {
+  --bg-color: #04070D;
+  --text-color: #ffffff;
+  --text-muted: #9ca3af;
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.05);
+  --glow-primary: rgba(79, 140, 255, 0.3);
+  --glow-secondary: rgba(159, 92, 255, 0.3);
+}
+
+body {
+  @apply bg-brand-950 text-text-main font-sans antialiased overflow-x-hidden selection:bg-primary/30 selection:text-text-main transition-colors duration-300;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-brand-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-surface-hover;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-border;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  @apply bg-surface backdrop-blur-xl border border-border;
+}
+.glass-panel-hover {
+  @apply hover:bg-surface-hover transition-colors duration-300;
+}
+
+/* Animated gradient text */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+}
+
+/* Subtle grid background */
+.bg-grid-pattern {
+  background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
