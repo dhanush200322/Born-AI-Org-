@@ -30,12 +30,7 @@ export default function SignUpPage() {
     if (error) {
       setError(error.message);
     } else {
-      navigate("/login", {
-        state: {
-          email,
-          message: "Your account has been created. Please check your email and verify your address before logging in."
-        }
-      });
+      navigate("/dashboard");
     }
   };
 
@@ -44,6 +39,9 @@ export default function SignUpPage() {
     setError(null);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`
+      }
     });
     if (error) {
       setError(error.message);
@@ -56,6 +54,9 @@ export default function SignUpPage() {
     setError(null);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`
+      }
     });
     if (error) {
       setError(error.message);

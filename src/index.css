@@ -7,15 +7,22 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   
   --color-brand-950: var(--bg-color);
-  --color-primary: #4F8CFF;
-  --color-secondary: #9F5CFF;
+  --color-primary: #5B8CFF;
+  --color-secondary: #8B5CF6;
+  --color-accent: #00D4FF;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  
   --color-text-main: var(--text-color);
+  --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   
   --color-surface: var(--surface-color);
+  --color-sidebar: var(--sidebar-color);
   --color-surface-hover: var(--surface-hover);
   --color-border: var(--border-color);
-  --color-border-focus: rgba(79, 140, 255, 0.5);
+  --color-border-focus: rgba(91, 140, 255, 0.5);
   
   --shadow-glow-primary: 0 0 20px var(--glow-primary);
   --shadow-glow-secondary: 0 0 20px var(--glow-secondary);
@@ -24,23 +31,27 @@
 :root {
   --bg-color: #f8fafc;
   --text-color: #0f172a;
+  --text-secondary: #475569;
   --text-muted: #64748b;
   --surface-color: rgba(0, 0, 0, 0.04);
+  --sidebar-color: #f1f5f9;
   --surface-hover: rgba(0, 0, 0, 0.08);
   --border-color: rgba(0, 0, 0, 0.1);
-  --glow-primary: rgba(79, 140, 255, 0.2);
-  --glow-secondary: rgba(159, 92, 255, 0.2);
+  --glow-primary: rgba(91, 140, 255, 0.2);
+  --glow-secondary: rgba(139, 92, 246, 0.2);
 }
 
 .dark {
-  --bg-color: #04070D;
-  --text-color: #ffffff;
-  --text-muted: #9ca3af;
-  --surface-color: rgba(255, 255, 255, 0.05);
-  --surface-hover: rgba(255, 255, 255, 0.1);
-  --border-color: rgba(255, 255, 255, 0.05);
-  --glow-primary: rgba(79, 140, 255, 0.3);
-  --glow-secondary: rgba(159, 92, 255, 0.3);
+  --bg-color: #050816;
+  --text-color: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --surface-color: #0B1220;
+  --sidebar-color: #101828;
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glow-primary: rgba(91, 140, 255, 0.15);
+  --glow-secondary: rgba(139, 92, 246, 0.15);
 }
 
 body {

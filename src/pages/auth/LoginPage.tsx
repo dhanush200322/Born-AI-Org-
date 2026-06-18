@@ -33,7 +33,7 @@ export default function LoginPage() {
     if (error) {
       setError(error.message);
     } else {
-      navigate("/");
+      navigate("/dashboard");
     }
   };
 
@@ -42,6 +42,9 @@ export default function LoginPage() {
     setError(null);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
     });
     if (error) {
       setError(error.message);
@@ -54,6 +57,9 @@ export default function LoginPage() {
     setError(null);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
     });
     if (error) {
       setError(error.message);
