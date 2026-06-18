@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../supabaseClient";
 import { 
@@ -19,7 +19,8 @@ import {
   HelpCircle,
   Menu,
   X,
-  Sparkles
+  Sparkles,
+  LogOut
 } from "lucide-react";
 
 const navigation = [
@@ -49,6 +50,7 @@ interface SidebarProps {
 
 export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
@@ -66,6 +68,11 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
       authListener.subscription.unsubscribe();
     };
   }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/login");
+  };
 
   const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email?.split('@')[0] || "John Doe";
   const displayEmail = user?.email || "Admin workspace";
@@ -131,7 +138,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           </nav>
         </div>
         <div className="p-4 border-t border-border">
-          <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-surface">
+          <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-surface group relative">
              {user?.user_metadata?.avatar_url ? (
                <img src={user.user_metadata.avatar_url} alt={displayName} className="w-8 h-8 rounded-full shadow-sm ring-1 ring-white/10 object-cover" />
              ) : (
@@ -143,6 +150,13 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                <p className="text-sm font-medium text-text-main truncate">{displayName}</p>
                <p className="text-xs text-text-muted truncate">{displayEmail}</p>
              </div>
+             <button 
+               onClick={handleLogout}
+               className="p-2 text-text-muted hover:text-danger hover:bg-danger/10 rounded-lg transition-colors absolute right-2 opacity-0 group-hover:opacity-100 focus:opacity-100"
+               title="Log out"
+             >
+               <LogOut className="w-4 h-4" />
+             </button>
           </div>
         </div>
       </div>
@@ -191,7 +205,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                 </nav>
               </div>
               <div className="p-4 border-t border-border">
-                <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-surface">
+                <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-surface group relative">
                    {user?.user_metadata?.avatar_url ? (
                      <img src={user.user_metadata.avatar_url} alt={displayName} className="w-8 h-8 rounded-full shadow-sm ring-1 ring-white/10 object-cover" />
                    ) : (
@@ -203,6 +217,13 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                      <p className="text-sm font-medium text-text-main truncate">{displayName}</p>
                      <p className="text-xs text-text-muted truncate">{displayEmail}</p>
                    </div>
+                   <button 
+                     onClick={handleLogout}
+                     className="p-2 text-text-muted hover:text-danger hover:bg-danger/10 rounded-lg transition-colors absolute right-2 md:opacity-0 group-hover:opacity-100 focus:opacity-100"
+                     title="Log out"
+                   >
+                     <LogOut className="w-4 h-4" />
+                   </button>
                 </div>
               </div>
             </motion.div>
