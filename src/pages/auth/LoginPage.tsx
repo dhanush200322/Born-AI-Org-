@@ -37,6 +37,30 @@ export default function LoginPage() {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+    if (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
+
+  const handleGithubLogin = async () => {
+    setIsLoading(true);
+    setError(null);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'github',
+    });
+    if (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <PageTransition>
       <AuthLayout>
@@ -142,7 +166,9 @@ export default function LoginPage() {
             <div className="grid grid-cols-2 gap-3">
               <button 
                 type="button" 
-                className="group flex items-center justify-center gap-2 py-2 px-4 rounded-xl border border-[#1a1f2e] bg-[#04070D]/50 text-gray-300 hover:bg-[#1a1f2e] hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm"
+                onClick={handleGoogleLogin}
+                disabled={isLoading}
+                className="group flex items-center justify-center gap-2 py-2 px-4 rounded-xl border border-[#1a1f2e] bg-[#04070D]/50 text-gray-300 hover:bg-[#1a1f2e] hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm disabled:opacity-70 disabled:hover:scale-100 disabled:active:scale-100"
               >
                 <div className="relative">
                   <div className="absolute inset-0 bg-white/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -158,7 +184,9 @@ export default function LoginPage() {
 
               <button 
                 type="button" 
-                className="group flex items-center justify-center gap-2 py-2 px-4 rounded-xl border border-[#1a1f2e] bg-[#04070D]/50 text-gray-300 hover:bg-[#1a1f2e] hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm"
+                onClick={handleGithubLogin}
+                disabled={isLoading}
+                className="group flex items-center justify-center gap-2 py-2 px-4 rounded-xl border border-[#1a1f2e] bg-[#04070D]/50 text-gray-300 hover:bg-[#1a1f2e] hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm disabled:opacity-70 disabled:hover:scale-100 disabled:active:scale-100"
               >
                 <div className="relative">
                   <div className="absolute inset-0 bg-white/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
