@@ -5,6 +5,7 @@ import LoginPage from "../pages/auth/LoginPage";
 import SignUpPage from "../pages/auth/SignUpPage";
 import { DashboardLayout } from "../pages/dashboard/DashboardLayout";
 import { DashboardPage } from "../pages/dashboard/DashboardPage";
+import { CreateAgentPage } from "../pages/dashboard/CreateAgentPage";
 
 export function AnimatedRoutes() {
   const location = useLocation();
@@ -18,6 +19,7 @@ export function AnimatedRoutes() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashboardPage />} />
+          <Route path="agents/new" element={<CreateAgentPage />} />
           <Route path="*" element={<DashboardPage />} />
         </Route>
       </Routes>

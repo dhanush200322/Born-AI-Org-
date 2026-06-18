@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import { Resend } from "resend";
+import { apiRouter } from "./src/backend/app";
 
 async function startServer() {
   const app = express();
@@ -9,7 +10,40 @@ async function startServer() {
 
   app.use(express.json());
 
+  // Mount modular backend architecture router
+  app.use("/api/v1", apiRouter);
+
   // API Routes
+  app.post("/api/optimize-prompt", async (req, res) => {
+    try {
+      if (!process.env.GEMINI_API_KEY) {
+        return res.status(500).json({ error: "GEMINI_API_KEY is not set" });
+      }
+      
+      const { GoogleGenAI } = await import("@google/genai");
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      
+      const { prompt } = req.body;
+      if (!prompt) return res.status(400).json({ error: "Prompt is required" });
+      
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: `You are an expert AI prompt engineer.
+Please optimize the following system prompt to be more robust, clear, and effective for an AI agent. 
+Keep the core intent identical but improve formatting, specific instructions, and clarity.
+Return ONLY the optimized prompt text without any markdown blocks or intro/outro text.
+
+Original Prompt:
+${prompt}`,
+      });
+      
+      res.json({ optimizedPrompt: response.text });
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json({ error: error.message || "Failed to optimize prompt" });
+    }
+  });
+
   app.post("/api/contact", async (req, res) => {
     try {
       const resendApiKey = process.env.RESEND_API_KEY;

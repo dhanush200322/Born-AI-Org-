@@ -14,6 +14,8 @@ import {
   LineChart, 
   Store, 
   CloudRain, 
+  PlusCircle,
+  Activity,
   CreditCard, 
   Settings, 
   HelpCircle,
@@ -25,16 +27,10 @@ import {
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Bot },
-  { name: 'AI Agents', href: '/dashboard/agents', icon: BrainCircuit },
-  { name: 'Knowledge Base', href: '/dashboard/knowledge', icon: Database },
-  { name: 'Memory', href: '/dashboard/memory', icon: Zap },
-  { name: 'Workflow Builder', href: '/dashboard/workflows', icon: Workflow },
-  { name: 'Automations', href: '/dashboard/automations', icon: Cable },
-  { name: 'Website Chat', href: '/dashboard/chat', icon: MessageSquare },
-  { name: 'Voice', href: '/dashboard/voice', icon: Phone },
-  { name: 'API', href: '/dashboard/api', icon: CloudRain },
+  { name: 'Create AI Agent', href: '/dashboard/agents/new', icon: PlusCircle },
+  { name: 'My Agents', href: '/dashboard/agents', icon: BrainCircuit },
+  { name: 'Usage of Agents', href: '/dashboard/usage', icon: Activity },
   { name: 'Analytics', href: '/dashboard/analytics', icon: LineChart },
-  { name: 'Marketplace', href: '/dashboard/marketplace', icon: Store },
 ];
 
 const secondaryNavigation = [
